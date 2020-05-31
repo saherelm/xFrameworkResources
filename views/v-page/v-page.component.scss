@@ -1,0 +1,27 @@
+.x-footer-content {
+  margin: 0;
+  padding: 0;
+}
+
+:host::ng-deep {
+  .x-toolbar-end-slot {
+    flex-shrink: 0 !important;
+    justify-content: flex-end;
+  }
+
+  .x-toolbar-start-slot {
+    flex-shrink: 1 !important;
+    flex-grow: 7 !important;
+    justify-content: flex-start;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+x-page {
+  --content-offset-top: -56px !important;
+  --content-offset-bottom: -56px !important;
+
+  --side-menu-content-offset-top: -56px !important;
+  --side-menu-content-offset-bottom: -56px !important;
+}

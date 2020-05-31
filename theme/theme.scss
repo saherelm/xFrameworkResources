@@ -1,0 +1,107 @@
+//
+// XFramework Color Mechanism ...
+:root {
+  /** Primary **/
+  --x-color-primary: #3880ff;
+  --x-color-primary-shade: #3171e0;
+  --x-color-primary-tint: #4c8dff;
+
+  --x-color-primary-contrast: #ffffff;
+  --x-color-primary-shade-contrast: #ffffff;
+  --x-color-primary-tint-contrast: #ffffff;
+
+  /** Secondary **/
+  --x-color-secondary: #0cd1e8;
+  --x-color-secondary-shade: #0bb8cc;
+  --x-color-secondary-tint: #24d6ea;
+
+  --x-color-secondary-contrast: #ffffff;
+  --x-color-secondary-shade-contrast: #ffffff;
+  --x-color-secondary-tint-contrast: #ffffff;
+
+  /** Tertiary **/
+  --x-color-tertiary: #7044ff;
+  --x-color-tertiary-shade: #633ce0;
+  --x-color-tertiary-tint: #7e57ff;
+
+  --x-color-tertiary-contrast: #ffffff;
+  --x-color-tertiary-shade-contrast: #ffffff;
+  --x-color-tertiary-tint-contrast: #ffffff;
+
+  /** Success **/
+  --x-color-success: #10dc60;
+  --x-color-success-shade: #0ec254;
+  --x-color-success-tint: #28e070;
+
+  --x-color-success-contrast: #ffffff;
+  --x-color-success-shade-contrast: #ffffff;
+  --x-color-success-tint-contrast: #ffffff;
+
+  /** Warning **/
+  --x-color-warning: #ffce00;
+  --x-color-warning-shade: #e0b500;
+  --x-color-warning-tint: #ffd31a;
+
+  --x-color-warning-contrast: #ffffff;
+  --x-color-warning-shade-contrast: #ffffff;
+  --x-color-warning-tint-contrast: #ffffff;
+
+  /** Danger **/
+  --x-color-danger: #f04141;
+  --x-color-danger-shade: #d33939;
+  --x-color-danger-tint: #f25454;
+
+  --x-color-danger-contrast: #ffffff;
+  --x-color-danger-shade-contrast: #ffffff;
+  --x-color-danger-tint-contrast: #ffffff;
+
+  /** Dark **/
+  --x-color-dark: #222428;
+  --x-color-dark-shade: #1e2023;
+  --x-color-dark-tint: #383a3e;
+
+  --x-color-dark-contrast: #ffffff;
+  --x-color-dark-shade-contrast: #ffffff;
+  --x-color-dark-tint-contrast: #ffffff;
+
+  /** Medium **/
+  --x-color-medium: #989aa2;
+  --x-color-medium-shade: #86888f;
+  --x-color-medium-tint: #a2a4ab;
+
+  --x-color-medium-contrast: #ffffff;
+  --x-color-medium-shade-contrast: #ffffff;
+  --x-color-medium-tint-contrast: #ffffff;
+
+  /** Light **/
+  --x-color-light: #f4f5f8;
+  --x-color-light-shade: #d7d8da;
+  --x-color-light-tint: #f5f6f9;
+
+  --x-color-light-contrast: #000000;
+  --x-color-light-shade-contrast: #000000;
+  --x-color-light-tint-contras: #000000;
+}
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+/* XFramework Theme */
+@import '~x-framework-components/theme/theme.scss';
+
+/* Override Default XFramework's Body Background Color */
+body {
+  background-color: #ffffff;
+}

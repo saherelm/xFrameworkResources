@@ -1,0 +1,69 @@
+<x-page
+  [color]="color"
+  [hasSide]="hasSide"
+  [sideSlot]="sideSlot"
+  [sideType]="sideType"
+  [cssClass]="cssClass"
+  [sideColor]="sideColor"
+  [menuState]="menuState"
+  [footerColor]="footerColor"
+  [toolbarTitle]="toolbarTitle"
+  [toolbarColor]="toolbarColor"
+  [toolbarHasBack]="toolbarHasBack"
+  [toolbarHasMenu]="toolbarHasMenu"
+  [toolbarLogoUrl]="toolbarLogoUrl"
+  [toggleMenuWhen]="toggleMenuWhen"
+  [toolbarShowBack]="toolbarShowBack"
+  [toolbarSubTitle]="toolbarSubTitle"
+  [toolbarShowMenu]="toolbarShowMenu"
+  [toolbarBackSlot]="toolbarBackSlot"
+  [toolbarMenuSlot]="toolbarMenuSlot"
+  [toolbarShowLogo]="toolbarShowLogo"
+  [scrollBehaviour]="scrollBehaviour"
+  [toolbarLogoSlot]="toolbarLogoSlot"
+  [toolbarTitleSlot]="toolbarTitleSlot"
+  [scrollEndClasses]="scrollEndClasses"
+  [scrollingClasses]="scrollingClasses"
+  [toolbarShowTitle]="toolbarShowTitle"
+  [toolbarContentSlot]="toolbarContentSlot"
+  [toolbarDefaultHref]="toolbarDefaultHref"
+  [toolbarBackHandler]="toolbarBackHandler"
+  [menuActionProvider]="menuActionProvider"
+  [scrollStartClasses]="scrollStartClasses"
+  [toolbarShowSubTitle]="toolbarShowSubTitle"
+  (scrolledEvent)="scrolledEvent.emit($event)"
+  (menuStateChange)="menuStateChange.emit($event)"
+  [toolbarShowProgressBar]="toolbarShowProgressBar"
+  [toolbarProgressBarColor]="toolbarProgressBarColor"
+  [scrollEventActionProvider]="scrollEventActionProvider"
+  (splitterStateChanged)="splitterStateChanged.emit($event)"
+  [footerContentTemplate]="footerContentTemplate || footerRef"
+  [toolbarEndSlotButtonsTemplate]="toolbarEndSlotButtonsTemplate"
+  [toolbarStartSlotButtonsTemplate]="toolbarStartSlotButtonsTemplate"
+  [toolbarContentTemplate]="toolbarContentTemplate || toolbarContentTemplateRef"
+>
+  <!-- Side Content -->
+  <div class="app-side-content" side>
+    <ng-container
+      *ngTemplateOutlet="defaultSideMenuRef"
+    ></ng-container>
+  </div>
+
+  <!-- Page Content -->
+  <div class="app-page-content">
+    <ng-content></ng-content>
+  </div>
+</x-page>
+
+<ng-template #footerRef>
+  <h4 class="x-footer-content">{{ resourceProvider(ResourceIDs.company) }}</h4>
+</ng-template>
+
+<ng-template #defaultSideMenuRef>
+  <x-navigator
+    [pages]="navPages"
+    [closeSiblings]="false"
+    [showParentIcon]="false"
+    [itemCssClass]="'m-nav-item'"
+  ></x-navigator>
+</ng-template>
