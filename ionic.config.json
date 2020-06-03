@@ -1,0 +1,16 @@
+{
+  "projects": {
+    "$APP_NAME": {
+      "name": "$APP_NAME",
+      "integrations": {
+        "capacitor": {}
+      },
+      "type": "angular",
+      "root": "$APP_NAME"
+    }
+  },
+  "integrations": {
+    "capacitor": {}
+  },
+  "defaultProject": "$APP_NAME"
+}
