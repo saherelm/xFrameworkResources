@@ -7,6 +7,10 @@ export const NotificationAudioSources: XNotificationSound[] = [
   },
   {
     type: XActionType.System,
-    resourcePath: '/assets/audio/system_notifications.wav',
+    resourcePath: '/assets/audio/system_notification.wav',
+  },
+  {
+    type: XActionType.Capture,
+    resourcePath: '/assets/audio/capture_notification.wav',
   },
 ];

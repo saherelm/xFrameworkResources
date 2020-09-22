@@ -19,26 +19,39 @@ import {
   XGridModule,
   XFormModule,
   XTableModule,
+  XThemeModule,
+  XEmptyModule,
+  XColorModule,
+  XButtonModule,
   XSliderModule,
   XSpinnerModule,
   XSlotterModule,
   XCounterModule,
   XStepperModule,
   XMarkdownModule,
+  XSearchBarModule,
   XThumbnailModule,
+  XActionBarModule,
   XFileUploadModule,
+  XColorPickerModule,
   XTabNavigatorModule,
   XFileDropAreaModule,
+  XAvatarUploadModule,
+  XBaseComponentModule,
   XExpandableListModule,
+  XExpandablePanelModule,
+  XDescriptionListModule,
+  XFrameworkComponentsModule,
 } from 'x-framework-components';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { VPageComponent } from './v-page/v-page.component';
+import { VMaintainerComponent } from './v-maintainer/v-maintainer.component';
 
 @NgModule({
-  declarations: [VPageComponent],
+  declarations: [VPageComponent, VMaintainerComponent],
   providers: [
     XManagerService,
     //
@@ -51,8 +64,8 @@ import { VPageComponent } from './v-page/v-page.component';
   ],
   imports: [
     //
-    CommonModule,
     IonicModule,
+    CommonModule,
 
     //
     XFrameworkCoreModule,
@@ -63,38 +76,51 @@ import { VPageComponent } from './v-page/v-page.component';
     XFrameworkServicesDirectivesModule,
 
     //
+    XEmptyModule,
+    XBaseComponentModule,
+    XFrameworkComponentsModule,
+
+    //
+    XFabModule,
+    XMapModule,
     XPageModule,
     XCardModule,
     XIconModule,
     XFormModule,
     XTabsModule,
-    XFabModule,
-    XMapModule,
     XTabsModule,
     XPageModule,
-    XCardModule,
     XIconModule,
     XListModule,
     XGridModule,
     XFormModule,
+    XColorModule,
     CommonModule,
     XTableModule,
+    XThemeModule,
+    XButtonModule,
     XSliderModule,
     XSpinnerModule,
     XStepperModule,
     XSlotterModule,
     XCounterModule,
     XMarkdownModule,
+    XSearchBarModule,
     XThumbnailModule,
+    XActionBarModule,
     XFileUploadModule,
+    XColorPickerModule,
     XFileDropAreaModule,
     XTabNavigatorModule,
+    XAvatarUploadModule,
     XExpandableListModule,
+    XExpandablePanelModule,
+    XDescriptionListModule,
   ],
   exports: [
     //
-    CommonModule,
     IonicModule,
+    CommonModule,
 
     //
     XFrameworkCoreModule,
@@ -104,13 +130,17 @@ import { VPageComponent } from './v-page/v-page.component';
     XFrameworkServicesModule,
     XFrameworkServicesDirectivesModule,
 
+    //
+    XEmptyModule,
+    XBaseComponentModule,
+
+    //
+    XFabModule,
+    XMapModule,
     XPageModule,
-    XCardModule,
     XIconModule,
     XFormModule,
     XTabsModule,
-    XFabModule,
-    XMapModule,
     XTabsModule,
     XPageModule,
     XCardModule,
@@ -118,22 +148,32 @@ import { VPageComponent } from './v-page/v-page.component';
     XListModule,
     XGridModule,
     XFormModule,
+    XColorModule,
     CommonModule,
     XTableModule,
+    XThemeModule,
+    XButtonModule,
     XSliderModule,
     XSpinnerModule,
     XStepperModule,
     XSlotterModule,
     XCounterModule,
     XMarkdownModule,
+    XSearchBarModule,
     XThumbnailModule,
+    XActionBarModule,
     XFileUploadModule,
+    XColorPickerModule,
     XFileDropAreaModule,
     XTabNavigatorModule,
+    XAvatarUploadModule,
     XExpandableListModule,
+    XExpandablePanelModule,
+    XDescriptionListModule,
 
     //
     VPageComponent,
+    VMaintainerComponent,
   ],
 })
 export class ViewsModule {}

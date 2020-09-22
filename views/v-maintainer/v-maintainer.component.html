@@ -1,0 +1,70 @@
+<div class="wrapper">
+  <h3 class="title">
+    {{ getResourceValue(ResourceIDs.maintainer_title) | async }}
+  </h3>
+  <h4 xColor="tertiary" isForeground="true" class="content">
+    {{ getResourceValue(ResourceIDs.maintainer_name) | async }}
+  </h4>
+  <div class="socials">
+    <!-- LinkedIn -->
+    <div class="social linkedin">
+      <a
+        target="_blank"
+        class="social-link"
+        href="https://www.linkedin.com/in/hadi-khazaee-asl/"
+      >
+        <x-icon name="logo_linkedin"></x-icon>
+      </a>
+    </div>
+
+    <!-- Github -->
+    <div class="social github">
+      <a target="_blank" class="social-link" href="https://github.com/saherelm">
+        <x-icon name="logo_github"></x-icon>
+      </a>
+    </div>
+
+    <!-- Gitlab -->
+    <div class="social gitlab">
+      <a target="_blank" class="social-link" href="https://gitlab.com/SaherElm">
+        <x-icon name="logo_gitlab"></x-icon>
+      </a>
+    </div>
+
+    <!-- DockerHub -->
+    <div class="social dockerhub">
+      <a
+        target="_blank"
+        class="social-link"
+        href="https://hub.docker.com/u/saherelm"
+      >
+        <x-icon name="logo_docker"></x-icon>
+      </a>
+    </div>
+
+    <!-- Skype -->
+    <div class="social skype">
+      <a target="_blank" class="social-link" href="skype:hadi_khazaee_asl?call">
+        <x-icon name="logo_skype"></x-icon>
+      </a>
+    </div>
+
+    <!-- Mail -->
+    <div class="social mail">
+      <a
+        target="_blank"
+        class="social-link"
+        href="mailto:hadi_khazaee_asl@yahoo.com"
+      >
+        <x-icon name="mail"></x-icon>
+      </a>
+    </div>
+
+    <!-- Web -->
+    <div class="social web">
+      <a target="_blank" class="social-link" href="https://www.saherelm.ir">
+        <x-icon name="web"></x-icon>
+      </a>
+    </div>
+  </div>
+</div>

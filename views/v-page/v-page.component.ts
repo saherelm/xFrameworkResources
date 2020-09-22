@@ -1,19 +1,31 @@
 import {
   Input,
   Inject,
+  Output,
+  NgZone,
   Renderer2,
   Component,
   ViewChild,
   ElementRef,
   TemplateRef,
-  ChangeDetectorRef
+  EventEmitter,
+  ChangeDetectorRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   XColor,
+  assign,
+  XParam,
+  XLocale,
   notValue,
+  isFunction,
+  XResourceIDs,
+  XPickerColumn,
   XStandardType,
   XOneOrManyType,
-  XColorIdentifier
+  XColorIdentifier,
+  XModalButtonRole,
+  XPickerColumnOption,
 } from 'x-framework-core';
 import { Observable } from 'rxjs';
 import {
@@ -22,39 +34,64 @@ import {
   XBackSlot,
   XSideType,
   XSideSlot,
+  XListItem,
   XTitleSlot,
+  XIconNames,
   XMenuState,
   XContentSlot,
   XPageComponent,
-  XLogoSlotIdentifier,
+  XPopoverComponent,
   XBackSlotIdentifier,
+  XLogoSlotIdentifier,
   XMenuSlotIdentifier,
   XPageSizeIdentifier,
   XSideSlotIdentifier,
   XSideTypeIdentifier,
   XTitleSlotIdentifier,
-  XContentSlotIdentifier
+  XListItemSlideOption,
+  XContentSlotIdentifier,
 } from 'x-framework-components';
+import { map } from 'rxjs/operators';
 import { MenuController } from '@ionic/angular';
 import { X_CONFIG } from '../../config/x-config';
 import { XConfig } from '../../config/app-config';
 import { ViewportRuler } from '@angular/cdk/overlay';
-import { isNullOrUndefined } from 'x-framework-core';
 import { XManagerService } from 'x-framework-services';
-import { NavPageItems } from '../../config/page.config';
+import { NavPageItems, Pages } from '../../config/page.config';
+import { isNullOrUndefined, hasChild } from 'x-framework-core';
+import { AppResourceIDs } from 'src/app/config/app.localization.config';
 
 @Component({
   // tslint:disable-next-line:component-selector
   selector: 'v-page',
   templateUrl: './v-page.component.html',
-  styleUrls: ['./v-page.component.scss']
+  styleUrls: ['./v-page.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VPageComponent extends XPageComponent {
   //
   //#region Props ...
   //
-  isMobileUi$: Observable<boolean>;
-  isNotMobileUi$: Observable<boolean>;
+  isMobileUi$ = this.managerService.isMobileUi$;
+  isNotMobileUi$ = this.managerService.isNotMobileUi$;
+
+  //
+  //#region CaptureMode ...
+  @Input()
+  enableCaptureMode: XStandardType<boolean> = false;
+
+  @Input()
+  downloadCapturedImage: XStandardType<boolean> = true;
+
+  @Input()
+  captureTopOffset: XStandardType<number> = 0;
+
+  @Input()
+  captureBottomOffset: XStandardType<number> = 0;
+
+  @Output()
+  imageCaptured = new EventEmitter<string | Blob>();
+  //#endregion
 
   //
   //#region Page Props ...
@@ -78,6 +115,26 @@ export class VPageComponent extends XPageComponent {
     return this.TOOLBAR_CONTENT_TEMPLATE;
   }
 
+  private TOOLBAR_END_SLOT_TEMPLATE: TemplateRef<any>;
+
+  /**
+   * the toolbar end slot content ...
+   */
+  @ViewChild('toolbarEndSlotButtonsTemplateRef', { static: false })
+  set toolbarEndSlotButtonsTemplate(v: TemplateRef<any>) {
+    //
+    if (isNullOrUndefined(v)) {
+      return;
+    }
+
+    //
+    this.TOOLBAR_END_SLOT_TEMPLATE = v;
+  }
+
+  get toolbarEndSlotButtonsTemplate() {
+    return this.TOOLBAR_END_SLOT_TEMPLATE;
+  }
+
   //
   navPages = NavPageItems;
 
@@ -99,7 +156,7 @@ export class VPageComponent extends XPageComponent {
 
   //
   @Input()
-  toolbarColor: XStandardType<XColor> = XColor.Light;
+  toolbarColor: XStandardType<XColor> = XColor.Primary;
   //#endregion
 
   //
@@ -133,7 +190,7 @@ export class VPageComponent extends XPageComponent {
   toolbarShowLogo: XStandardType<boolean> = true;
 
   @Input()
-  toolbarLogoUrl: XStandardType<string> = '/assets/image/logo.png';
+  toolbarLogoUrl: XStandardType<string> = './assets/image/logo.png';
   //#endregion
 
   //
@@ -148,7 +205,7 @@ export class VPageComponent extends XPageComponent {
   toolbarHasBack: XStandardType<boolean> = true;
 
   @Input()
-  toolbarDefaultHref = '/';
+  toolbarDefaultHref: string;
   //#endregion
 
   //
@@ -158,7 +215,7 @@ export class VPageComponent extends XPageComponent {
 
   //
   @Input()
-  menuState: XStandardType<XMenuState> = XMenuState.Opened;
+  menuState: XStandardType<XMenuState>;
 
   //
   @Input()
@@ -178,7 +235,13 @@ export class VPageComponent extends XPageComponent {
   //#endregion
 
   //
-  //#region Ion Content Scrolling Handlers ...
+  //#region Scrolling Handlers ...
+  @Input()
+  provideScrollEvents: XStandardType<boolean> = true;
+
+  @Input()
+  scrollBehaviour: XOneOrManyType<string> = ['x-fab'];
+
   @Input()
   scrollStartClasses: XOneOrManyType<string> = 'start-scroll';
 
@@ -190,7 +253,7 @@ export class VPageComponent extends XPageComponent {
   //#region Footer Props ...
   //
   @Input()
-  footerColor: XStandardType<XColor> = XColor.Light;
+  footerColor: XStandardType<XColorIdentifier> = XColor.Primary;
   //#endregion
 
   //
@@ -209,13 +272,14 @@ export class VPageComponent extends XPageComponent {
   sideType: XStandardType<XSideTypeIdentifier> = XSideType.Overlay;
 
   @Input()
-  sideColor: XStandardType<XColorIdentifier> = XColor.Light;
+  sideColor: XStandardType<XColorIdentifier> = XColor.Primary;
   //#endregion
   //#endregion
 
   //
   //#region Constructor ...
   constructor(
+    public zone: NgZone,
     public element: ElementRef,
     public renderer: Renderer2,
     public ruler: ViewportRuler,
@@ -225,6 +289,7 @@ export class VPageComponent extends XPageComponent {
     @Inject(X_CONFIG) public config: XConfig
   ) {
     super(
+      zone,
       renderer,
       element,
       ruler,
@@ -242,21 +307,42 @@ export class VPageComponent extends XPageComponent {
 
   //
   //#region LifeCycle ...
-  // tslint:disable-next-line:use-lifecycle-interface
-  async ngAfterViewInit() {
-    super.ngAfterViewInit();
+  onInit() {
+    super.onInit();
 
     //
-    // await this.handleHasSideEffect();
+    this.menuState = this.isMobileUi$.pipe(
+      map((isMobile) => (isMobile ? XMenuState.WillClose : XMenuState.Opened))
+    );
+  }
+
+  async afterViewInit() {
+    super.afterViewInit();
+
+    //
+    const showToolbar = await this.getValueAsync(this.showToolbar);
+    if (showToolbar) {
+      this.detectChanges();
+    }
+
+    //
     this.managerService.dispatchResizeEvent();
   }
 
-  // tslint:disable-next-line:use-lifecycle-interface
-  ngAfterViewChecked() {
-    super.ngAfterViewChecked();
+  afterViewChecked() {
+    super.afterViewChecked();
 
     //
     this.changeDetector.detectChanges();
+  }
+
+  async onChange(changeKeys: string[]) {
+    super.onChange(changeKeys);
+
+    //
+    if (changeKeys.includes('hasSide')) {
+      await this.handleHasSideEffect();
+    }
   }
   //#endregion
 
@@ -267,7 +353,7 @@ export class VPageComponent extends XPageComponent {
 
     //
     //#region Register ManagerService Loading Handler ...
-    this.managerService.isLoading$.subscribe(isLoading => {
+    this.managerService.isLoading$.subscribe((isLoading) => {
       this.toolbarShowProgressBar = isLoading;
     });
     //#endregion
@@ -276,13 +362,135 @@ export class VPageComponent extends XPageComponent {
 
   //
   //#region Handlers ...
-  async onChange(changeKeys: string[]) {
-    super.onChange(changeKeys);
+  //#endregion
+
+  //
+  //#region UI Handlers ...
+  async handleMoreButtonClicked(event: any) {
+    //
+    const onlyIcon = false;
 
     //
-    if (changeKeys.includes('hasSide')) {
-      await this.handleHasSideEffect();
+    const slideOptions: XListItemSlideOption[] = [];
+
+    //
+    slideOptions.push({
+      id: 'change_language',
+      icon: XIconNames.language,
+      title: XResourceIDs.language,
+      color: XColor.Tertiary,
+      slot: 'start',
+      onlyIcon,
+      handler: async () => {
+        await this.handleChangeLocale();
+      },
+    });
+
+    //
+    const isCaptureModeEnabled = await this.getValueAsync(
+      this.enableCaptureMode
+    );
+    if (isCaptureModeEnabled) {
+      //
+      slideOptions.push({
+        id: 'disable_capture_mode',
+        icon: XIconNames.crop,
+        title: XResourceIDs.disable_capture_mode,
+        color: XColor.Danger,
+        slot: 'start',
+        onlyIcon,
+        handler: async () => {
+          //
+          this.enableCaptureMode = false;
+          this.detectChanges();
+        },
+      });
+    } else {
+      //
+      slideOptions.push({
+        id: 'enable_capture_mode',
+        icon: XIconNames.crop,
+        title: XResourceIDs.enable_capture_mode,
+        color: XColor.Tertiary,
+        slot: 'start',
+        onlyIcon,
+        handler: async () => {
+          //
+          this.enableCaptureMode = true;
+          this.detectChanges();
+        },
+      });
     }
+
+    //
+    slideOptions.push({
+      id: 'theme_manager',
+      icon: XIconNames.color_palette,
+      title: AppResourceIDs.theme_manager,
+      color: XColor.Tertiary,
+      slot: 'start',
+      onlyIcon,
+      handler: async () => {
+        //
+        const route = this.managerService.mergeRoutes(Pages.ThemeManager.route);
+        await this.managerService.navigateByUrl(route);
+      },
+    });
+
+    //
+    const item: XListItem<any> = {
+      data: '',
+      slideOptions,
+    };
+
+    //
+    const popOver = await this.managerService.dialogService.presentPopover({
+      component: XPopoverComponent,
+      componentProps: assign({}, { key: XParam.Item, value: item }),
+      translucent: true,
+      showBackdrop: true,
+      event,
+    });
+
+    //
+    const { data } = await popOver.onWillDismiss();
+    if (!data || !data.id || !data.data) {
+      return;
+    }
+
+    //
+    const optionId = data.id.toString() as string;
+    const option =
+      item && item.slideOptions
+        ? item.slideOptions.find((so) => so.id === optionId)
+        : null;
+    if (!option) {
+      return;
+    }
+
+    //
+    const handler = option.handler;
+    if (!handler || !isFunction(handler)) {
+      return;
+    }
+
+    //
+    // Run Handler ...
+    await handler();
+  }
+
+  async handleImageCaptured(image: string | Blob) {
+    //
+    console.log('imageCaptured: ', image);
+
+    //
+    if (image) {
+      this.imageCaptured.emit(image);
+    }
+
+    //
+    this.enableCaptureMode = false;
+    this.detectChanges();
   }
   //#endregion
 
@@ -301,6 +509,68 @@ export class VPageComponent extends XPageComponent {
       this.toolbarShowMenu = false;
       this.toggleMenuWhen = '';
     }
+  }
+
+  private async handleChangeLocale() {
+    //
+    const currentLocale = this.managerService.currentLocale;
+    const availableLanguages = this.config.availableLanguages.map((ai) => {
+      return {
+        name: ai.name,
+        locale: ai.locale,
+      };
+    });
+    if (!hasChild(availableLanguages)) {
+      return;
+    }
+
+    //
+    const localOptions: XPickerColumnOption[] = availableLanguages.map((al) => {
+      //
+      const op: XPickerColumnOption = {
+        text: al.name,
+        value: al.locale,
+        disabled: al.locale === currentLocale,
+      };
+
+      //
+      return op;
+    });
+    const localColumn: XPickerColumn = {
+      name: 'locales',
+      options: localOptions,
+    };
+
+    //
+    await this.managerService.dialogService.presentPicker({
+      buttons: [
+        {
+          text: XResourceIDs.ok,
+          role: XModalButtonRole.Selected,
+          cssClass: ['btn-selected'],
+          handler: async (value) => {
+            //
+            const selectedLocale: XLocale = value?.locales?.value;
+            if (!selectedLocale) {
+              return;
+            }
+
+            //
+            await this.managerService.settingsService.changeLocale(
+              selectedLocale,
+              true
+            );
+          },
+        },
+        {
+          text: XResourceIDs.cancel,
+          role: XModalButtonRole.Cancel,
+          cssClass: ['btn-cancel'],
+          handler: () => {},
+        },
+      ],
+      columns: [localColumn],
+    });
   }
   //#endregion
 }

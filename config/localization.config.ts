@@ -16,7 +16,7 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       // TODO: Customize this ...
       {
         id: 'app_name',
-        value: 'فریمورک ایکس',
+        value: 'چارچوب ایکس',
       },
       //
       // TODO: Customize this ...
@@ -43,6 +43,38 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'خطا',
       },
       {
+        id: 'required',
+        value: 'الزامی است.',
+      },
+
+      //
+      {
+        id: 'loading',
+        value: 'بارگزاری',
+      },
+
+      //
+      {
+        id: 'username',
+        value: 'نام کاربری',
+      },
+      {
+        id: 'password',
+        value: 'کلمه عبور',
+      },
+
+      //
+      {
+        id: 'first_name',
+        value: 'نام',
+      },
+      {
+        id: 'last_name',
+        value: 'نام خانوادگی',
+      },
+
+      //
+      {
         id: 'verified',
         value: 'تایید شده',
       },
@@ -55,6 +87,26 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'thumbnail',
         value: 'پیش نمایش',
+      },
+
+      //
+      {
+        id: 'language',
+        value: 'زبان',
+      },
+
+      //
+      {
+        id: 'take_screenshot',
+        value: 'تصویر برداری ازمحیط',
+      },
+      {
+        id: 'enable_capture_mode',
+        value: 'فعالسازی حالت تصویر برداری',
+      },
+      {
+        id: 'disable_capture_mode',
+        value: 'غیرفعالسازی حالت تصویر برداری',
       },
       //#endregion
 
@@ -88,6 +140,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         id: 'unknown',
         value: 'ناشناس',
       },
+      {
+        id: 'location',
+        value: 'موقعیت جغرافیای',
+      },
       //#endregion
 
       //
@@ -120,6 +176,22 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       //#endregion
 
       //
+      //#region Components ...
+      {
+        id: 'map_dialog_title',
+        value: 'نمایش موقعیت مکانی',
+      },
+      {
+        id: 'map_dialog_select_title',
+        value: 'انتخاب موقعیت جغرافیایی',
+      },
+      {
+        id: 'color_picker_dialog_title',
+        value: 'انتخاب رنگ',
+      },
+      //#endregion
+
+      //
       //#region Verbs ...
       {
         id: 'dismiss',
@@ -132,6 +204,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'ok',
         value: 'بسیار خب',
+      },
+      {
+        id: 'save',
+        value: 'ذخیره',
       },
       {
         id: 'cancel',
@@ -195,12 +271,24 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'ارسال',
       },
       {
+        id: 'show',
+        value: 'نمایش دادن',
+      },
+      {
+        id: 'hide',
+        value: 'پنهان کردن',
+      },
+      {
         id: 'search',
         value: 'جستجو',
       },
       {
         id: 'delete',
         value: 'حذف',
+      },
+      {
+        id: 'clone',
+        value: 'نمونه گیری',
       },
       {
         id: 'select_all',
@@ -232,8 +320,105 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'انتخاب محل',
       },
       {
+        id: 'preset_colors',
+        value: 'رنگ های پیش فرض',
+      },
+      {
+        id: 'copy_to_clipboard',
+        value: 'ثبت در حافظه موقت',
+      },
+      {
+        id: 'color',
+        value: 'رنگ',
+      },
+      {
         id: 'upload',
         value: 'بارگزاری',
+      },
+      {
+        id: 'continue',
+        value: 'ادامه',
+      },
+      {
+        id: 'finish',
+        value: 'پایان',
+      },
+      {
+        id: 'enable',
+        value: 'فعال',
+      },
+      {
+        id: 'disable',
+        value: 'غیر فعال',
+      },
+      {
+        id: 'all',
+        value: 'همه',
+      },
+      {
+        id: 'new',
+        value: 'جدید',
+      },
+      {
+        id: 'add',
+        value: 'افزودن',
+      },
+      {
+        id: 'update',
+        value: 'بروز رسانی',
+      },
+      {
+        id: 'details',
+        value: 'جزئیات',
+      },
+      {
+        id: 'translation',
+        value: 'ترجمه',
+      },
+      {
+        id: 'download',
+        value: 'دریافت',
+      },
+      {
+        id: 'list',
+        value: 'فهرست',
+      },
+      {
+        id: 'options',
+        value: 'انتخاب ها',
+      },
+      {
+        id: 'descriptions',
+        value: 'توضیحات',
+      },
+
+      //
+      {
+        id: 'type',
+        value: 'نوع',
+      },
+      //
+      {
+        id: 'media',
+        value: 'رسانه',
+      },
+      {
+        id: 'medias',
+        value: 'رسانه ها',
+      },
+
+      //
+      {
+        id: 'go',
+        value: 'رفتن',
+      },
+      {
+        id: 'input',
+        value: 'ورود',
+      },
+      {
+        id: 'preview',
+        value: 'پیش نمایش',
       },
       //#endregion
 
@@ -254,6 +439,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'next',
         value: 'بعدی',
+      },
+      {
+        id: 'back',
+        value: 'بازگشت',
       },
       //#endregion
 
@@ -306,6 +495,54 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       //#endregion
 
       //
+      //#region Theme Related ...
+      //
+      {
+        id: 'theme',
+        value: 'پوسته',
+      },
+      {
+        id: 'theme_mode',
+        value: 'حالت نمایشی',
+      },
+      //
+      {
+        id: 'theme_dark',
+        value: 'تیره',
+      },
+      {
+        id: 'theme_light',
+        value: 'روشن',
+      },
+      //
+      {
+        id: 'theme_name',
+        value: 'نام پوسته',
+      },
+      {
+        id: 'theme_name_description',
+        value: 'نام پوسته را وارد کنید',
+      },
+      //
+      {
+        id: 'theme_clone_title',
+        value: 'نمونه گیری از پوسته',
+      },
+      //#endregion
+
+      //
+      //#region Color Picker Related ...
+      {
+        id: 'input_color_title',
+        value: 'تعیین رنگ',
+      },
+      {
+        id: 'input_color_description',
+        value: 'مقدار رنگ را وارد کنید',
+      },
+      //#endregion
+
+      //
       // Custom Translations ...
       ...FaCustomLocales,
 
@@ -352,6 +589,38 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'Error',
       },
       {
+        id: 'required',
+        value: 'required',
+      },
+
+      //
+      {
+        id: 'loading',
+        value: 'loading',
+      },
+
+      //
+      {
+        id: 'username',
+        value: 'Username',
+      },
+      {
+        id: 'password',
+        value: 'Password',
+      },
+
+      //
+      {
+        id: 'first_name',
+        value: 'Firstname',
+      },
+      {
+        id: 'last_name',
+        value: 'Lastname',
+      },
+
+      //
+      {
         id: 'verified',
         value: 'Verified',
       },
@@ -364,6 +633,26 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'thumbnail',
         value: 'Thumbnail',
+      },
+
+      //
+      {
+        id: 'language',
+        value: 'Language',
+      },
+
+      //
+      {
+        id: 'take_screenshot',
+        value: 'Take Screenshot',
+      },
+      {
+        id: 'enable_capture_mode',
+        value: 'Enable Capture Mode',
+      },
+      {
+        id: 'disable_capture_mode',
+        value: 'Disable Capture Mode',
       },
       //#endregion
 
@@ -397,6 +686,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         id: 'unknown',
         value: 'Unknown',
       },
+      {
+        id: 'location',
+        value: 'Location',
+      },
       //#endregion
 
       //
@@ -428,6 +721,22 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       //#endregion
 
       //
+      //#region Components ...
+      {
+        id: 'map_dialog_title',
+        value: 'Show Location',
+      },
+      {
+        id: 'map_dialog_select_title',
+        value: 'Select Location',
+      },
+      {
+        id: 'color_picker_dialog_title',
+        value: 'Select Color',
+      },
+      //#endregion
+
+      //
       //#region Verbs ...
       {
         id: 'dismiss',
@@ -440,6 +749,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'ok',
         value: 'Ok',
+      },
+      {
+        id: 'save',
+        value: 'Save',
       },
       {
         id: 'cancel',
@@ -503,12 +816,24 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'Send',
       },
       {
+        id: 'show',
+        value: 'Show',
+      },
+      {
+        id: 'hide',
+        value: 'Hide',
+      },
+      {
         id: 'search',
         value: 'Search',
       },
       {
         id: 'delete',
         value: 'Delete',
+      },
+      {
+        id: 'clone',
+        value: 'Clone',
       },
       {
         id: 'select_all',
@@ -540,8 +865,106 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
         value: 'Selected Location',
       },
       {
+        id: 'preset_colors',
+        value: 'Preset Colors',
+      },
+      {
+        id: 'copy_to_clipboard',
+        value: 'Copy to Clipboard',
+      },
+      {
+        id: 'color',
+        value: 'Color',
+      },
+      //
+      {
         id: 'upload',
         value: 'Upload',
+      },
+      {
+        id: 'continue',
+        value: 'Continue',
+      },
+      {
+        id: 'finish',
+        value: 'Finish',
+      },
+      {
+        id: 'enable',
+        value: 'Enable',
+      },
+      {
+        id: 'disable',
+        value: 'Disable',
+      },
+      {
+        id: 'all',
+        value: 'All',
+      },
+      {
+        id: 'new',
+        value: 'New',
+      },
+      {
+        id: 'add',
+        value: 'Add',
+      },
+      {
+        id: 'update',
+        value: 'Update',
+      },
+      {
+        id: 'details',
+        value: 'Details',
+      },
+      {
+        id: 'translation',
+        value: 'Translation',
+      },
+      {
+        id: 'download',
+        value: 'Download',
+      },
+      {
+        id: 'list',
+        value: 'List',
+      },
+      {
+        id: 'options',
+        value: 'Options',
+      },
+      {
+        id: 'descriptions',
+        value: 'Description',
+      },
+
+      //
+      {
+        id: 'type',
+        value: 'Type',
+      },
+      //
+      {
+        id: 'media',
+        value: 'Media',
+      },
+      {
+        id: 'medias',
+        value: 'Medias',
+      },
+
+      //
+      {
+        id: 'go',
+        value: 'Go',
+      },
+      {
+        id: 'input',
+        value: 'Input',
+      },
+      {
+        id: 'preview',
+        value: 'Preview',
       },
       //#endregion
 
@@ -562,6 +985,10 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'next',
         value: 'Next',
+      },
+      {
+        id: 'back',
+        value: 'Back',
       },
       //#endregion
 
@@ -610,6 +1037,54 @@ export const AvailableTranslationResources: XLanguageDescriptor[] = [
       {
         id: 'x_markdown_guide',
         value: 'Markdown Guide',
+      },
+      //#endregion
+
+      //
+      //#region Theme Related ...
+      //
+      {
+        id: 'theme',
+        value: 'Theme',
+      },
+      {
+        id: 'theme_mode',
+        value: 'Theme Mode',
+      },
+      //
+      {
+        id: 'theme_dark',
+        value: 'Dark',
+      },
+      {
+        id: 'theme_light',
+        value: 'Light',
+      },
+      //
+      {
+        id: 'theme_name',
+        value: 'Theme Name',
+      },
+      {
+        id: 'theme_name_description',
+        value: 'Enter Theme name',
+      },
+      //
+      {
+        id: 'theme_clone_title',
+        value: 'Theme Cloning',
+      },
+      //#endregion
+
+      //
+      //#region Color Picker Related ...
+      {
+        id: 'input_color_title',
+        value: 'Color Value',
+      },
+      {
+        id: 'input_color_description',
+        value: 'input color value',
       },
       //#endregion
 

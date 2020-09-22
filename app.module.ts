@@ -1,4 +1,5 @@
 import {
+  XCanDeactivateGuard,
   XFrameworkCoreModule,
   X_FRAMEWORK_CORE_CONFIG,
 } from 'x-framework-core';
@@ -15,15 +16,19 @@ import {
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { AppComponent } from './app.component';
+import { ViewsModule } from './views/views.module';
 import { X_CONFIG, XCONFIG } from './config/x-config';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserModule } from '@angular/platform-browser';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+import { environment } from '../environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
+    ViewsModule,
     BrowserModule,
     AppRoutingModule,
     XFrameworkCoreModule,
@@ -31,6 +36,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
     BrowserAnimationsModule,
     XFrameworkServicesModule,
     XFrameworkComponentsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     XManagerService,
@@ -57,6 +65,9 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
       useClass: XHttpInterceptorService,
       multi: true,
     },
+    //
+    // Provide it ..
+    XCanDeactivateGuard
   ],
   bootstrap: [AppComponent],
 })

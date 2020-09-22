@@ -80,7 +80,7 @@
 
   --x-color-light-contrast: #000000;
   --x-color-light-shade-contrast: #000000;
-  --x-color-light-tint-contras: #000000;
+  --x-color-light-tint-contrast: #000000;
 }
 /* Core CSS required for Ionic components to work properly */
 @import '~@ionic/angular/css/core.css';
@@ -104,4 +104,85 @@
 /* Override Default XFramework's Body Background Color */
 body {
   background-color: #ffffff;
+}
+
+.code-block {
+  direction: ltr;
+  color: white;
+  margin: {
+    top: 6px;
+    bottom: 8px;
+  }
+  // white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  background-color: black;
+
+  //
+  overflow: hidden;
+
+  //
+  .x-header {
+    direction: var(--ui-direction) !important;
+  }
+}
+
+//
+//#region Card ..
+$border-radius: 8px;
+
+x-card.v-card,
+.v-card > x-card {
+  .x-title {
+    margin-bottom: 8px;
+    font-size: 16px !important;
+
+    color: var(--x-color-primary-tint-contrast);
+  }
+
+  .x-sub-title {
+    margin-bottom: 0;
+    font-size: 12px !important;
+
+    color: var(--x-color-primary-tint-contrast);
+  }
+
+  mat-card {
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  mat-card.mobile {
+    .mat-card-header {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+
+  mat-card-header {
+    @include transition-duration();
+
+    //
+    background-color: var(--x-color-primary-tint);
+
+    //
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+  }
+
+  mat-card-header:hover {
+    background-color: var(--x-color-primary-shade);
+  }
+}
+
+x-card.v-card.v-no-margin-card,
+.v-card.v-no-margin-card > x-card {
+  mat-card-content {
+    padding: 0 !important;
+  }
+}
+//#endregion
+
+.x-auto-complete-margin {
+  margin-top: -1.34375em;
 }

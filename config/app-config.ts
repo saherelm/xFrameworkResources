@@ -1,11 +1,11 @@
+import {
+  DefaultLocale,
+  AvailableTranslationResources,
+} from './localization.config';
 import { XFrameworkCoreConfig } from 'x-framework-core';
 import { NotificationAudioSources } from './audio.config';
 import { XFrameworkServicesConfig } from 'x-framework-services';
 import { XFrameworkComponentsConfig } from 'x-framework-components';
-import {
-  AvailableTranslationResources,
-  DefaultLocale,
-} from './localization.config';
 
 // tslint:disable-next-line:no-empty-interface
 export interface AppConfig {}
@@ -23,10 +23,10 @@ export type XConfig = XFrameworkCoreConfig &
   AppConfig;
 export type XSharedConfig = Partial<XConfig>;
 
-export const xFrameworkCoreSharedConfig: XFrameworkComponentsSharedConfig = {
+export const xFrameworkCoreSharedConfig: XFrameworkCoreSharedConfig = {
   //
   // App Info ...
-  appInstanceName: 'xFramework App',
+  appInstanceName: 'xFrameworkTestApp',
   appNameResource: 'app_name',
   appCompanyResource: 'company',
   appVersion: 'v1.1',
@@ -75,7 +75,17 @@ export const xFrameworkCoreSharedConfig: XFrameworkComponentsSharedConfig = {
 
 export const xFrameworkServicesSharedConfig: XFrameworkServicesSharedConfig = {};
 
-export const xFrameworkComponentsSharedConfig: XFrameworkComponentsSharedConfig = {};
+export const xFrameworkComponentsSharedConfig: XFrameworkComponentsSharedConfig = {
+  //
+  // File Config ...
+  minAllowedFileSize: 512,
+  maxAllowedFileSize: 20971520,
+  maxAllowedSize: 966367641,
+  maxUploadFiles: 10,
+
+  //
+  defaultSearchDebounceTime: 500,
+};
 
 export const xAppSharedConfig: XAppSharedConfig = {};
 

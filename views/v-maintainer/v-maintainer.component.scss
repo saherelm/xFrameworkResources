@@ -1,0 +1,23 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+.socials {
+  margin-top: 6px;
+}
+
+.social {
+  display: inline-block;
+  margin: 0 2px;
+}
+
+:host-context(::ng-deep.x-icon) {
+  &:hover {
+    color: var(--x-color-tertiary) !important;
+  }
+}

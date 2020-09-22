@@ -1,0 +1,19 @@
+<v-page
+  [hasSide]="true"
+  [actions]="actions"
+  [toolbarShowSubTitle]="true"
+  [toolbarHasBack]="toolbarHasBack"
+  [toolbarShowBack]="toolbarShowBack"
+  [toolbarSubTitle]="toolbarSubTitle"
+  [toolbarShowProgressBar]="isLoading"
+  [toolbarBackHandler]="toolbarBackHandler"
+>
+  <!-- Theme Manager -->
+  <x-theme-manager
+    [isInPage]="true"
+    [wrapWithCard]="true"
+    (tabChange)="handleTabChange($event)"
+    (themeChange)="handleThemeChange($event)"
+    [actionProvider]="themeManagerActionProvider"
+  ></x-theme-manager>
+</v-page>
