@@ -35,11 +35,6 @@ export class ThemeManagerPage extends VPageComponent {
     AppResourceIDs.theme_manager_description
   );
   toolbarShowSubTitle = true;
-
-  //
-  toolbarBackHandler: () => XStandardType<void> = async () => {
-    await this.backHandler();
-  };
   //#endregion
 
   //
@@ -75,6 +70,11 @@ export class ThemeManagerPage extends VPageComponent {
   //
   // Theme Maker Action Provider ...
   themeManagerActionProvider = new Subject<XThemeManagerActionModel>();
+
+  //
+  toolbarBackHandler: () => XStandardType<void> = async () => {
+    await this.backHandler();
+  }
   //#endregion
 
   //

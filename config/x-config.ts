@@ -1,6 +1,6 @@
 import { XConfig } from './app-config';
-import { environment } from '../../environments/environment';
 import { InjectionToken } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 export const XCONFIG: XConfig = JSON.parse(
   JSON.stringify(environment.configurations)
